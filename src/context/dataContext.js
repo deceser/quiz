@@ -17,6 +17,7 @@ export const DataProvider = ({children}) => {
   const [studentSurname, setStudentSurname] = useState('');
   const [sessionId, setSessionId] = useState(null);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [allAnswers, setAllAnswers] = useState([]); // Массив всех ответов для сохранения
 
   // Display Controlling States
   const [showStart, setShowStart] = useState(true);
@@ -43,7 +44,7 @@ export const DataProvider = ({children}) => {
   const checkSessionStatus = async (sessionIdToCheck) => {
     const { data, error } = await supabase
       .from('quiz_sessions')
-      .select('id, first_name, last_name, total_score, max_score, completed_at')
+      .select('id, first_name, last_name, correct_answers, total_questions, completed_at')
       .eq('id', sessionIdToCheck)
       .single();
 
@@ -52,7 +53,7 @@ export const DataProvider = ({children}) => {
       setSessionId(data.id);
       setStudentName(data.first_name);
       setStudentSurname(data.last_name);
-      setMarks(data.total_score);
+      setMarks(data.correct_answers);
       setIsCompleted(true);
       setShowStart(false);
       setShowQuiz(false);
@@ -89,8 +90,9 @@ export const DataProvider = ({children}) => {
         {
           first_name: firstName,
           last_name: lastName,
-          total_score: 0,
-          max_score: quizs.length * 5
+          correct_answers: 0,
+          total_questions: quizs.length,
+          percentage: 0
         }
       ])
       .select()
@@ -103,6 +105,7 @@ export const DataProvider = ({children}) => {
 
     if (data) {
       setSessionId(data.id);
+      setAllAnswers([]); // Сбрасываем массив ответов
       return true;
     }
     return false;
@@ -128,15 +131,28 @@ export const DataProvider = ({children}) => {
 
   // Next Quesion
   const nextQuestion = async () => {
-    // Сохраняем ответ в Supabase перед переходом
+    // Сохраняем ответ перед переходом
     if (sessionId && selectedAnswer) {
       const isCorrect = selectedAnswer === correctAnswer;
-      const newMarks = isCorrect ? marks + 5 : marks;
+      const newMarks = isCorrect ? marks + 1 : marks; // Теперь +1 за правильный ответ (из 10)
 
       if (isCorrect) {
         setMarks(newMarks);
       }
 
+      // Добавляем ответ в массив
+      const answerData = {
+        question_id: question.id,
+        question_text: question.question,
+        selected_answer: selectedAnswer,
+        correct_answer: correctAnswer,
+        is_correct: isCorrect
+      };
+
+      const updatedAnswers = [...allAnswers, answerData];
+      setAllAnswers(updatedAnswers);
+
+      // Сохраняем в таблицу quiz_answers для аналитики
       const { error } = await supabase
         .from('quiz_answers')
         .insert([
@@ -162,15 +178,31 @@ export const DataProvider = ({children}) => {
 
   // Show Result
   const showTheResult = async () => {
+    let finalAnswers = [...allAnswers];
+    let finalMarks = marks;
+
     // Сохраняем последний ответ перед показом результата
     if (sessionId && selectedAnswer) {
       const isCorrect = selectedAnswer === correctAnswer;
-      const newMarks = isCorrect ? marks + 5 : marks;
+      finalMarks = isCorrect ? marks + 1 : marks; // +1 за правильный (из 10)
 
       if (isCorrect) {
-        setMarks(newMarks);
+        setMarks(finalMarks);
       }
 
+      // Добавляем последний ответ в массив
+      const lastAnswerData = {
+        question_id: question.id,
+        question_text: question.question,
+        selected_answer: selectedAnswer,
+        correct_answer: correctAnswer,
+        is_correct: isCorrect
+      };
+
+      finalAnswers = [...allAnswers, lastAnswerData];
+      setAllAnswers(finalAnswers);
+
+      // Сохраняем последний ответ в quiz_answers
       const { error: answerError } = await supabase
         .from('quiz_answers')
         .insert([
@@ -187,19 +219,20 @@ export const DataProvider = ({children}) => {
       if (answerError) {
         console.error('Ошибка сохранения последнего ответа:', answerError);
       }
-
-      // Небольшая задержка для обновления marks
-      await new Promise(resolve => setTimeout(resolve, 100));
     }
 
     // Обновляем финальный результат в Supabase
     if (sessionId) {
-      const finalMarks = selectedAnswer === correctAnswer ? marks + 5 : marks;
+      const totalQuestions = quizs.length;
+      const percentage = Math.round((finalMarks / totalQuestions) * 100);
       
       const { error } = await supabase
         .from('quiz_sessions')
         .update({
-          total_score: finalMarks,
+          correct_answers: finalMarks,
+          total_questions: totalQuestions,
+          percentage: percentage,
+          all_answers: finalAnswers, // Сохраняем все ответы в JSONB
           completed_at: new Date().toISOString()
         })
         .eq('id', sessionId);

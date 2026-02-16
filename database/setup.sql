@@ -10,8 +10,10 @@ CREATE TABLE quiz_sessions (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   first_name TEXT NOT NULL,
   last_name TEXT NOT NULL,
-  total_score INTEGER DEFAULT 0,
-  max_score INTEGER DEFAULT 0,
+  correct_answers INTEGER NOT NULL DEFAULT 0,  -- Количество правильных ответов (из 10)
+  total_questions INTEGER NOT NULL DEFAULT 0,  -- Общее количество вопросов (10)
+  percentage INTEGER NOT NULL DEFAULT 0,       -- Процент правильных ответов
+  all_answers JSONB,                           -- Полная копия всех ответов для быстрого доступа
   completed_at TIMESTAMP,
   created_at TIMESTAMP DEFAULT NOW()
 );
@@ -31,6 +33,7 @@ CREATE TABLE quiz_answers (
 -- Индексы для оптимизации
 CREATE INDEX idx_quiz_answers_session_id ON quiz_answers(session_id);
 CREATE INDEX idx_quiz_sessions_created_at ON quiz_sessions(created_at DESC);
+CREATE INDEX idx_quiz_sessions_percentage ON quiz_sessions(percentage DESC);
 
 -- Включаем Row Level Securityl
 ALTER TABLE quiz_sessions ENABLE ROW LEVEL SECURITY;
