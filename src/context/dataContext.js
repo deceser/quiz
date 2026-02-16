@@ -99,7 +99,7 @@ export const DataProvider = ({children}) => {
       .single();
 
     if (error) {
-      console.error('Ошибка создания сессии:', error);
+      console.error('Помилка створення сесії:', error);
       return false;
     }
 
@@ -115,7 +115,7 @@ export const DataProvider = ({children}) => {
   const startQuiz = () => {
     // Проверяем, не завершен ли уже тест
     if (isCompleted) {
-      console.warn('Тест уже завершен');
+      console.warn('Тест вже завершено');
       return;
     }
     setShowStart(false);
@@ -167,7 +167,7 @@ export const DataProvider = ({children}) => {
         ]);
 
       if (error) {
-        console.error('Ошибка сохранения ответа:', error);
+        console.error('Помилка збереження відповіді:', error);
       }
     }
 
@@ -217,7 +217,7 @@ export const DataProvider = ({children}) => {
         ]);
 
       if (answerError) {
-        console.error('Ошибка сохранения последнего ответа:', answerError);
+        console.error('Помилка збереження останньої відповіді:', answerError);
       }
     }
 
@@ -238,7 +238,7 @@ export const DataProvider = ({children}) => {
         .eq('id', sessionId);
 
       if (error) {
-        console.error('Ошибка обновления результата:', error);
+        console.error('Помилка оновлення результату:', error);
       } else {
         // Сохраняем ID завершенной сессии в localStorage
         localStorage.setItem('quiz_completed_session', sessionId);
@@ -254,7 +254,7 @@ export const DataProvider = ({children}) => {
   // Start Over - ЗАБЛОКИРОВАНО (не используется)
   const startOver = () => {
     // Функция заблокирована - повторное прохождение теста запрещено
-    console.warn('Повторное прохождение теста запрещено');
+    console.warn('Повторне проходження тесту заборонено');
   };
     return (
         <DataContext.Provider value={{
