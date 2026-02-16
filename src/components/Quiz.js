@@ -3,10 +3,10 @@ import DataContext from '../context/dataContext';
 
 const Quiz = () => {
     const { showQuiz, question, quizs, checkAnswer, correctAnswer,
-            selectedAnswer,questionIndex, nextQuestion, showTheResult }  = useContext(DataContext);
+            selectedAnswer,questionIndex, nextQuestion, showTheResult, isCompleted }  = useContext(DataContext);
 
     return (
-        <section className="bg-dark text-white" style={{ display: `${showQuiz ? 'block' : 'none'}` }}>
+        <section className="bg-dark text-white" style={{ display: `${showQuiz && !isCompleted ? 'block' : 'none'}` }}>
             <div className="container">
                 <div className="row vh-100 align-items-center justify-content-center">
                     <div className="col-lg-8">
@@ -19,8 +19,9 @@ const Quiz = () => {
                                 {
                                     question?.options?.map((item, index) => <button
                                         key={index}
-                                        className={`option w-100 text-start btn text-white py-2 px-3 mt-3 rounded btn-dark ${correctAnswer === item && 'bg-success'}`}
+                                        className={`option w-100 text-start btn text-white py-2 px-3 mt-3 rounded btn-dark ${selectedAnswer === item ? 'bg-primary' : ''}`}
                                         onClick={(event) => checkAnswer(event, item)}
+                                        disabled={isCompleted}
                                     >
                                         {item}
                                     </button>)
@@ -29,9 +30,9 @@ const Quiz = () => {
 
                             {
                                 (questionIndex + 1) !== quizs.length ?
-                                    <button className='btn py-2 w-100 mt-3 bg-primary text-light fw-bold' onClick={nextQuestion} disabled={!selectedAnswer}>Next Question</button>
+                                    <button className='btn py-2 w-100 mt-3 bg-primary text-light fw-bold' onClick={nextQuestion} disabled={!selectedAnswer || isCompleted}>Следующий вопрос</button>
                                     :
-                                    <button className='btn py-2 w-100 mt-3 bg-primary text-light fw-bold' onClick={showTheResult} disabled={!selectedAnswer}>Show Result</button>
+                                    <button className='btn py-2 w-100 mt-3 bg-primary text-light fw-bold' onClick={showTheResult} disabled={!selectedAnswer || isCompleted}>Показать результат</button>
                             }
                         </div>
                     </div>

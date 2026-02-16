@@ -1,40 +1,40 @@
 [
     {
         "id": "01",
-        "question" : "Which of the following is the correct name of React.js?",
+        "question" : "Какое из следующих названий является правильным для React.js?",
         "options": [
             "React",
             "React.js",
             "ReactJS",
-            "All of the above"
+            "Все вышеперечисленное"
         ],
-        "answer": "All of the above"
+        "answer": "Все вышеперечисленное"
     },
     {
         "id": "02",
-        "question" : "Which of the following are the advantages of React.js?",
+        "question" : "Какие из следующих являются преимуществами React.js?",
         "options": [
-            "React.js can increase the application's performance with Virtual DOM.",
-            "React.js is easy to integrate with other frameworks such as Angular, BackboneJS since it is only a view library.",
-            "React.js can render both on client and server side.",
-            "All of the above"
+            "React.js может повысить производительность приложения с помощью Virtual DOM.",
+            "React.js легко интегрируется с другими фреймворками, такими как Angular, BackboneJS, поскольку это только библиотека представления.",
+            "React.js может выполнять рендеринг как на стороне клиента, так и на стороне сервера.",
+            "Все вышеперечисленное"
         ],
-        "answer": "All of the above"
+        "answer": "Все вышеперечисленное"
     },
     {
         "id": "03",
-        "question" : "Which of the following is not a disadvantage of React.js?",
+        "question" : "Что из перечисленного НЕ является недостатком React.js?",
         "options": [
-            "React.js has only a view layer. We have put your code for Ajax requests, events and so on.",
-            "The library of React.js is pretty large.",
-            "The JSX in React.js makes code easy to read and write.",
-            "The learning curve can be steep in React.js."
+            "React.js имеет только слой представления. Нужно писать код для Ajax-запросов, событий и так далее.",
+            "Библиотека React.js довольно большая.",
+            "JSX в React.js делает код легким для чтения и написания.",
+            "Кривая обучения React.js может быть крутой."
         ],
-        "answer": "The JSX in React.js makes code easy to read and write."
+        "answer": "JSX в React.js делает код легким для чтения и написания."
     },
     {
         "id": "04",
-        "question" : "Which of the following command is used to install create-react-app?",
+        "question" : "Какая из следующих команд используется для установки create-react-app?",
         "options": [
             "npm install -g create-react-app",
             "npx create-react-app my-app",
@@ -45,18 +45,18 @@
     },
     {
         "id": "05",
-        "question" : "What of the following is used in React.js to increase performance?",
+        "question" : "Что из перечисленного используется в React.js для повышения производительности?",
         "options": [
-            "Original DOM",
-            "Virtual DOM",
-            "Both A and B.",
-            "None of the above."
+            "Оригинальный DOM",
+            "Виртуальный DOM",
+            "И A, и B.",
+            "Ничего из вышеперечисленного."
         ],
-        "answer": "Virtual DOM"
+        "answer": "Виртуальный DOM"
     },
     {
         "id": "06",
-        "question" : "What is the default port where webpack-server runs?",
+        "question" : "Какой порт по умолчанию использует webpack-server?",
         "options": [
             "3000",
             "8080",
@@ -67,46 +67,46 @@
     },
     {
         "id": "07",
-        "question" : "How many numbers of elements a valid react component can return?",
+        "question" : "Сколько элементов может вернуть валидный React-компонент?",
         "options": [
             "1",
             "2",
             "3",
-            "Unlimited"
+            "Неограниченно"
         ],
         "answer": "1"
     },
     {
         "id": "08",
-        "question" : "What is the declarative way to render a dynamic list of components based on values in an array?",
+        "question" : "Какой декларативный способ используется для рендеринга динамического списка компонентов на основе значений в массиве?",
         "options": [
-            "Using the reduce array method",
-            "Using the <Each /> component",
-            "Using the Array.map() method",
-            "With a for/while loop"
+            "Использование метода массива reduce",
+            "Использование компонента <Each />",
+            "Использование метода Array.map()",
+            "С помощью цикла for/while"
         ],
-        "answer": "Using the Array.map() method"
+        "answer": "Использование метода Array.map()"
     },
     {
         "id": "09",
-        "question" : "What is a state in React?",
+        "question" : "Что такое state в React?",
         "options": [
-            "A permanent storage.",
-            "Internal storage of the component.",
-            "External storage of the component.",
-            "None of the above."
+            "Постоянное хранилище.",
+            "Внутреннее хранилище компонента.",
+            "Внешнее хранилище компонента.",
+            "Ничего из вышеперечисленного."
         ],
-        "answer": "Internal storage of the component."
+        "answer": "Внутреннее хранилище компонента."
     },
     {
         "id": "10",
-        "question" : "What are the two ways to handle data in React?",
+        "question" : "Какие два способа обработки данных существуют в React?",
         "options": [
-            "State & Props",
-            "Services & Components",
-            "State & Services",
-            "State & Component"
+            "State и Props",
+            "Services и Components",
+            "State и Services",
+            "State и Component"
         ],
-        "answer": "State & Props"
+        "answer": "State и Props"
     }
 ]

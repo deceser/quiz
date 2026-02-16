@@ -1,4 +1,72 @@
-# Getting Started with Create React App
+# React Quiz App
+
+Приложение для прохождения квиза по React.js с сохранением результатов в Supabase.
+
+## Возможности
+
+- Форма регистрации ученика (имя и фамилия)
+- Интерактивный квиз с 10 вопросами по React.js
+- Визуальная обратная связь (правильные/неправильные ответы)
+- Сохранение всех ответов в базу данных Supabase
+- Отображение итогового результата с именем ученика
+- Детальная статистика по каждому вопросу
+
+## Технологии
+
+- React 18
+- Bootstrap 5
+- Supabase (база данных и хранение)
+- Context API (управление состоянием)
+
+## Быстрый старт
+
+### 1. Установка зависимостей
+
+```bash
+npm install
+```
+
+### 2. Настройка Supabase
+
+Следуйте инструкциям в файле [SUPABASE_SETUP.md](SUPABASE_SETUP.md) для:
+- Создания проекта в Supabase
+- Создания таблиц базы данных
+- Получения API ключей
+- Настройки `.env.local`
+
+### 3. Запуск приложения
+
+```bash
+npm start
+```
+
+Откройте [http://localhost:3000](http://localhost:3000) для просмотра в браузере.
+
+## Структура проекта
+
+```
+src/
+├── components/
+│   ├── Start.js      # Форма регистрации
+│   ├── Quiz.js       # Компонент квиза
+│   └── Result.js     # Страница результатов
+├── context/
+│   └── dataContext.js # Управление состоянием + Supabase логика
+├── lib/
+│   └── supabaseClient.js # Конфигурация Supabase
+└── App.js
+```
+
+## База данных
+
+### Таблицы
+
+1. `quiz_sessions` - хранит информацию о каждом прохождении квиза
+2. `quiz_answers` - детальные ответы на каждый вопрос
+
+Подробнее в [SUPABASE_SETUP.md](SUPABASE_SETUP.md)
+
+---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
