@@ -24,6 +24,11 @@ export const DataProvider = ({children}) => {
   const [showQuiz, setShowQuiz] = useState(false);
   const [showResult, setShowResult] = useState(false);
 
+  // Timer States - таймер на 20 минут
+  const [timeLeft, setTimeLeft] = useState(1200); // 20 минут = 1200 секунд
+  const [timerActive, setTimerActive] = useState(false);
+  const [timeExpired, setTimeExpired] = useState(false);
+
   // Load JSON Data
   useEffect(() => {
     fetch('quiz.json')
@@ -42,7 +47,7 @@ export const DataProvider = ({children}) => {
 
   // Проверка статуса сессии
   const checkSessionStatus = async (sessionIdToCheck) => {
-    const { data, error } = await supabase
+    const { data } = await supabase
       .from('quiz_sessions')
       .select('id, first_name, last_name, correct_answers, total_questions, completed_at')
       .eq('id', sessionIdToCheck)
@@ -70,6 +75,35 @@ export const DataProvider = ({children}) => {
       setQuesion(quizs[questionIndex]);
     }
   }, [quizs, questionIndex])
+
+  // Timer Effect - обратный отсчет
+  useEffect(() => {
+    let interval = null;
+    if (timerActive && timeLeft > 0 && !isCompleted) {
+      interval = setInterval(() => {
+        setTimeLeft((time) => {
+          if (time <= 1) {
+            // Время истекло
+            setTimerActive(false);
+            setTimeExpired(true);
+            return 0;
+          }
+          return time - 1;
+        });
+      }, 1000);
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [timerActive, timeLeft, isCompleted]);
+
+  // Автоматическое завершение при истечении времени
+  useEffect(() => {
+    if (timeExpired && !isCompleted) {
+      showTheResult();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [timeExpired, isCompleted]);
 
   // Set Student Info and Create Supabase Session
   const setStudentInfo = async (firstName, lastName) => {
@@ -120,6 +154,10 @@ export const DataProvider = ({children}) => {
     }
     setShowStart(false);
     setShowQuiz(true);
+    // Запускаем таймер на 20 минут
+    setTimeLeft(1200);
+    setTimerActive(true);
+    setTimeExpired(false);
   };
 
   // Check Answer
@@ -178,6 +216,9 @@ export const DataProvider = ({children}) => {
 
   // Show Result
   const showTheResult = async () => {
+    // Останавливаем таймер при завершении теста
+    setTimerActive(false);
+    
     let finalAnswers = [...allAnswers];
     let finalMarks = marks;
 
@@ -260,7 +301,8 @@ export const DataProvider = ({children}) => {
         <DataContext.Provider value={{
             startQuiz,showStart,showQuiz,question,quizs,checkAnswer,correctAnswer,
             selectedAnswer,questionIndex,nextQuestion,showTheResult,showResult,marks,
-            startOver,setStudentInfo,studentName,studentSurname,sessionId,isCompleted
+            startOver,setStudentInfo,studentName,studentSurname,sessionId,isCompleted,
+            timeLeft,timerActive
         }} >
             {children}
         </DataContext.Provider>

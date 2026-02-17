@@ -3,8 +3,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import DataContext from '../context/dataContext';
 
 const Quiz = () => {
-    const { showQuiz, question, quizs, checkAnswer, correctAnswer,
-            selectedAnswer, questionIndex, nextQuestion, showTheResult, isCompleted } = useContext(DataContext);
+    const { showQuiz, question, quizs, checkAnswer,
+            selectedAnswer, questionIndex, nextQuestion, showTheResult, isCompleted, timeLeft, timerActive } = useContext(DataContext);
+
+    // Форматирование времени в MM:SS
+    const formatTime = (seconds) => {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    };
 
     const containerStyle = {
         minHeight: '100vh',
@@ -134,6 +141,62 @@ const Quiz = () => {
                             {quizs.indexOf(question) + 1} / {quizs?.length}
                         </motion.div>
                     </motion.div>
+
+                    {/* Timer - таймер обратного отсчета */}
+                    {timerActive && (
+                        <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            style={{
+                                background: timeLeft <= 60 
+                                    ? 'rgba(220, 53, 69, 0.2)' 
+                                    : timeLeft <= 300 
+                                        ? 'rgba(255, 193, 7, 0.2)' 
+                                        : 'rgba(255, 255, 255, 0.15)',
+                                borderRadius: '16px',
+                                padding: '16px 24px',
+                                marginBottom: '24px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                gap: '12px',
+                                border: timeLeft <= 60 
+                                    ? '2px solid rgba(220, 53, 69, 0.6)' 
+                                    : '2px solid rgba(255, 255, 255, 0.2)'
+                            }}
+                        >
+                            <motion.span
+                                animate={timeLeft <= 60 ? { scale: [1, 1.2, 1] } : {}}
+                                transition={{ duration: 1, repeat: Infinity }}
+                                style={{ fontSize: '24px' }}
+                            >
+                                {timeLeft <= 60 ? '⏰' : '⏱️'}
+                            </motion.span>
+                            <motion.div
+                                animate={timeLeft <= 60 ? { color: ['#fff', '#ff6b6b', '#fff'] } : {}}
+                                transition={{ duration: 1, repeat: Infinity }}
+                                style={{
+                                    fontSize: '28px',
+                                    fontWeight: 'bold',
+                                    color: timeLeft <= 60 
+                                        ? '#ff6b6b' 
+                                        : timeLeft <= 300 
+                                            ? '#ffc107' 
+                                            : '#fff',
+                                    fontFamily: 'monospace'
+                                }}
+                            >
+                                {formatTime(timeLeft)}
+                            </motion.div>
+                            <span style={{ 
+                                fontSize: '14px', 
+                                color: 'rgba(255, 255, 255, 0.8)',
+                                fontWeight: '500'
+                            }}>
+                                {timeLeft <= 60 ? 'Поспішайте!' : 'залишилось'}
+                            </span>
+                        </motion.div>
+                    )}
 
                     <motion.h3
                         initial={{ opacity: 0, y: 20 }}
