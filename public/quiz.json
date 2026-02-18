@@ -1,112 +1,277 @@
 [
     {
         "id": "01",
-        "question" : "Which of the following is the correct name of React.js?",
+        "question": "Який тип даних у C# використовується для зберігання цілих чисел?",
         "options": [
-            "React",
-            "React.js",
-            "ReactJS",
-            "All of the above"
+            "string",
+            "int",
+            "double",
+            "bool"
         ],
-        "answer": "All of the above"
+        "answer": "int"
     },
     {
         "id": "02",
-        "question" : "Which of the following are the advantages of React.js?",
+        "question": "Яка команда використовується для виведення тексту на консоль у C#?",
         "options": [
-            "React.js can increase the application's performance with Virtual DOM.",
-            "React.js is easy to integrate with other frameworks such as Angular, BackboneJS since it is only a view library.",
-            "React.js can render both on client and server side.",
-            "All of the above"
+            "Console.Read()",
+            "Console.WriteLine()",
+            "print()",
+            "System.Out()"
         ],
-        "answer": "All of the above"
+        "answer": "Console.WriteLine()"
     },
     {
         "id": "03",
-        "question" : "Which of the following is not a disadvantage of React.js?",
+        "question": "Чому дорівнюватиме значення x після виконання: int x = 10 + 5 * 2;",
         "options": [
-            "React.js has only a view layer. We have put your code for Ajax requests, events and so on.",
-            "The library of React.js is pretty large.",
-            "The JSX in React.js makes code easy to read and write.",
-            "The learning curve can be steep in React.js."
+            "30",
+            "20",
+            "25",
+            "15"
         ],
-        "answer": "The JSX in React.js makes code easy to read and write."
+        "answer": "20"
     },
     {
         "id": "04",
-        "question" : "Which of the following command is used to install create-react-app?",
+        "question": "Що виведе код: if (5 > 3) { Console.WriteLine(\"Так\"); } else { Console.WriteLine(\"Ні\"); }",
         "options": [
-            "npm install -g create-react-app",
-            "npx create-react-app my-app",
-            "npm install create-react-app",
-            "npm install -f create-react-app"
+            "Так",
+            "Ні",
+            "Помилка",
+            "Нічого"
         ],
-        "answer": "npx create-react-app my-app"
+        "answer": "Так"
     },
     {
         "id": "05",
-        "question" : "What of the following is used in React.js to increase performance?",
+        "question": "Скільки разів виконається цикл: for (int i = 0; i < 5; i++)",
         "options": [
-            "Original DOM",
-            "Virtual DOM",
-            "Both A and B.",
-            "None of the above."
+            "4 рази",
+            "5 разів",
+            "6 разів",
+            "Нескінченно"
         ],
-        "answer": "Virtual DOM"
+        "answer": "5 разів"
     },
     {
         "id": "06",
-        "question" : "What is the default port where webpack-server runs?",
+        "question": "Яка умова правильна для циклу while, який має виконатись хоча б один раз?",
         "options": [
-            "3000",
-            "8080",
-            "3030",
-            "6060"
+            "while (false)",
+            "while (true)",
+            "Використовувати do-while",
+            "while (0)"
         ],
-        "answer": "3000"
+        "answer": "Використовувати do-while"
     },
     {
         "id": "07",
-        "question" : "How many numbers of elements a valid react component can return?",
+        "question": "Як правильно оголосити масив з 10 цілих чисел у C#?",
+        "options": [
+            "int[] array = new int[10];",
+            "int array[10];",
+            "array int[10];",
+            "int[10] array;"
+        ],
+        "answer": "int[] array = new int[10];"
+    },
+    {
+        "id": "08",
+        "question": "Який індекс має перший елемент масиву?",
         "options": [
             "1",
-            "2",
-            "3",
-            "Unlimited"
+            "0",
+            "-1",
+            "Залежить від розміру масиву"
+        ],
+        "answer": "0"
+    },
+    {
+        "id": "09",
+        "question": "Як створити двовимірний масив 8x8 для дошки шашок у C#?",
+        "options": [
+            "int[8][8] board;",
+            "int[][] board = new int[8][8];",
+            "int[,] board = new int[8, 8];",
+            "int board[8, 8];"
+        ],
+        "answer": "int[,] board = new int[8, 8];"
+    },
+    {
+        "id": "10",
+        "question": "Як дізнатися довжину одновимірного масиву arr у C#?",
+        "options": [
+            "arr.size",
+            "arr.count",
+            "arr.Length",
+            "arr.length()"
+        ],
+        "answer": "arr.Length"
+    },
+    {
+        "id": "11",
+        "question": "Який тип даних використовується для зберігання тексту в C#?",
+        "options": [
+            "text",
+            "string",
+            "char",
+            "varchar"
+        ],
+        "answer": "string"
+    },
+    {
+        "id": "12",
+        "question": "Як зчитати дані з консолі в змінну у C#?",
+        "options": [
+            "Console.Input()",
+            "Console.ReadLine()",
+            "Console.Scan()",
+            "Input()"
+        ],
+        "answer": "Console.ReadLine()"
+    },
+    {
+        "id": "13",
+        "question": "Що виведе: Console.WriteLine(10 > 5);",
+        "options": [
+            "10",
+            "5",
+            "True",
+            "False"
+        ],
+        "answer": "True"
+    },
+    {
+        "id": "14",
+        "question": "Чому дорівнює i після виконання: int i = 0; i++;",
+        "options": [
+            "0",
+            "1",
+            "-1",
+            "Помилка"
         ],
         "answer": "1"
     },
     {
-        "id": "08",
-        "question" : "What is the declarative way to render a dynamic list of components based on values in an array?",
+        "id": "15",
+        "question": "Який оператор використовується для логічного І в C#?",
         "options": [
-            "Using the reduce array method",
-            "Using the <Each /> component",
-            "Using the Array.map() method",
-            "With a for/while loop"
+            "AND",
+            "&",
+            "&&",
+            "||"
         ],
-        "answer": "Using the Array.map() method"
+        "answer": "&&"
     },
     {
-        "id": "09",
-        "question" : "What is a state in React?",
+        "id": "16",
+        "question": "Що робить команда break у циклі?",
         "options": [
-            "A permanent storage.",
-            "Internal storage of the component.",
-            "External storage of the component.",
-            "None of the above."
+            "Завершує програму",
+            "Виходить з циклу",
+            "Пропускає одну ітерацію",
+            "Створює помилку"
         ],
-        "answer": "Internal storage of the component."
+        "answer": "Виходить з циклу"
     },
     {
-        "id": "10",
-        "question" : "What are the two ways to handle data in React?",
+        "id": "17",
+        "question": "Як створити масив з початковими значеннями {1, 2, 3} у C#?",
         "options": [
-            "State & Props",
-            "Services & Components",
-            "State & Services",
-            "State & Component"
+            "int[] arr = {1, 2, 3};",
+            "int[] arr = [1, 2, 3];",
+            "int arr = new int{1, 2, 3};",
+            "int[] arr = (1, 2, 3);"
         ],
-        "answer": "State & Props"
+        "answer": "int[] arr = {1, 2, 3};"
+    },
+    {
+        "id": "18",
+        "question": "Як отримати другий елемент масиву arr?",
+        "options": [
+            "arr[2]",
+            "arr[1]",
+            "arr(1)",
+            "arr.get(2)"
+        ],
+        "answer": "arr[1]"
+    },
+    {
+        "id": "19",
+        "question": "Що виведе: int[] arr = {5, 10, 15}; Console.WriteLine(arr[0]);",
+        "options": [
+            "5",
+            "10",
+            "15",
+            "0"
+        ],
+        "answer": "5"
+    },
+    {
+        "id": "20",
+        "question": "Як правильно пройти по всіх елементах масиву arr?",
+        "options": [
+            "for (int i = 0; i < arr.Length; i++)",
+            "for (int i = 1; i <= arr.Length; i++)",
+            "for (int i = 0; i <= arr.Length; i++)",
+            "for (int i = 1; i < arr.Length; i++)"
+        ],
+        "answer": "for (int i = 0; i < arr.Length; i++)"
+    },
+    {
+        "id": "21",
+        "question": "Як звернутися до елемента двовимірного масиву board на 3-му рядку, 5-му стовпці?",
+        "options": [
+            "board[3][5]",
+            "board[2, 4]",
+            "board(2, 4)",
+            "board[3, 5]"
+        ],
+        "answer": "board[2, 4]"
+    },
+    {
+        "id": "22",
+        "question": "Що відбудеться при зверненні до arr[10], якщо довжина масиву 5?",
+        "options": [
+            "Поверне 0",
+            "Поверне null",
+            "Помилка виконання",
+            "Створить новий елемент"
+        ],
+        "answer": "Помилка виконання"
+    },
+    {
+        "id": "23",
+        "question": "Як змінити значення першого елемента масиву arr на 100?",
+        "options": [
+            "arr[1] = 100;",
+            "arr[0] = 100;",
+            "arr.set(0, 100);",
+            "arr.first = 100;"
+        ],
+        "answer": "arr[0] = 100;"
+    },
+    {
+        "id": "24",
+        "question": "Скільки елементів у масиві int[,] board = new int[8, 8];",
+        "options": [
+            "8",
+            "16",
+            "64",
+            "256"
+        ],
+        "answer": "64"
+    },
+    {
+        "id": "25",
+        "question": "Який тип даних використовується для зберігання true/false?",
+        "options": [
+            "int",
+            "bool",
+            "bit",
+            "boolean"
+        ],
+        "answer": "bool"
     }
 ]

@@ -1,43 +1,264 @@
 import React, { useContext } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import DataContext from '../context/dataContext';
 
 const Quiz = () => {
-    const { showQuiz, question, quizs, checkAnswer, correctAnswer,
-            selectedAnswer,questionIndex, nextQuestion, showTheResult }  = useContext(DataContext);
+    const { showQuiz, question, quizs, checkAnswer,
+            selectedAnswer, questionIndex, nextQuestion, showTheResult, isCompleted, timeLeft, timerActive } = useContext(DataContext);
+
+    // Форматирование времени в MM:SS
+    const formatTime = (seconds) => {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    };
+
+    const containerStyle = {
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        display: showQuiz && !isCompleted ? 'flex' : 'none',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '20px'
+    };
+
+    const cardStyle = {
+        background: 'rgba(255, 255, 255, 0.1)',
+        backdropFilter: 'blur(10px)',
+        borderRadius: '24px',
+        padding: window.innerWidth <= 480 ? '20px' : window.innerWidth <= 768 ? '30px' : '40px',
+        boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+        border: '1px solid rgba(255, 255, 255, 0.18)',
+        maxWidth: '800px',
+        width: '100%'
+    };
+
+    const progressStyle = {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: '30px',
+        padding: '20px',
+        background: 'rgba(255, 255, 255, 0.15)',
+        borderRadius: '16px'
+    };
+
+    const optionStyle = (isSelected) => ({
+        background: isSelected 
+            ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+            : 'rgba(255, 255, 255, 0.15)',
+        border: isSelected 
+            ? '2px solid rgba(255, 255, 255, 0.6)'
+            : '2px solid rgba(255, 255, 255, 0.2)',
+        borderRadius: '16px',
+        padding: '18px 24px',
+        color: '#fff',
+        fontSize: '16px',
+        cursor: isCompleted ? 'not-allowed' : 'pointer',
+        width: '100%',
+        textAlign: 'left',
+        marginTop: '12px',
+        transition: 'all 0.3s ease',
+        fontWeight: isSelected ? '600' : '500',
+        boxShadow: isSelected ? '0 4px 15px rgba(102, 126, 234, 0.4)' : 'none'
+    });
+
+    const buttonStyle = {
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        border: 'none',
+        borderRadius: '16px',
+        padding: '16px',
+        color: '#fff',
+        fontSize: '18px',
+        fontWeight: 'bold',
+        cursor: !selectedAnswer || isCompleted ? 'not-allowed' : 'pointer',
+        width: '100%',
+        marginTop: '24px',
+        opacity: !selectedAnswer || isCompleted ? 0.5 : 1,
+        transition: 'all 0.2s ease',
+        boxShadow: '0 4px 15px rgba(102, 126, 234, 0.4)'
+    };
 
     return (
-        <section className="bg-dark text-white" style={{ display: `${showQuiz ? 'block' : 'none'}` }}>
-            <div className="container">
-                <div className="row vh-100 align-items-center justify-content-center">
-                    <div className="col-lg-8">
-                        <div className="card p-4" style={{ background: '#3d3d3d', borderColor: '#646464' }}>
-                            <div className="d-flex justify-content-between gap-md-3">
-                                <h5 className='mb-2 fs-normal lh-base'>{question?.question}</h5>
-                                <h5 style={{ color: '#60d600', width: '100px', textAlign: 'right' }}>{quizs.indexOf(question) + 1} / {quizs?.length}</h5>
+        <div style={containerStyle}>
+            <AnimatePresence mode="wait">
+                <motion.div
+                    key={questionIndex}
+                    initial={{ opacity: 0, x: 100 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -100 }}
+                    transition={{ duration: 0.3 }}
+                    style={cardStyle}
+                >
+                    <motion.div 
+                        style={progressStyle}
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                    >
+                        <div style={{ flex: 1 }}>
+                            <div style={{ 
+                                fontSize: '14px', 
+                                color: 'rgba(255, 255, 255, 0.8)',
+                                marginBottom: '8px',
+                                fontWeight: '500'
+                            }}>
+                                Прогрес
                             </div>
-                            <div>
-                                {
-                                    question?.options?.map((item, index) => <button
-                                        key={index}
-                                        className={`option w-100 text-start btn text-white py-2 px-3 mt-3 rounded btn-dark ${correctAnswer === item && 'bg-success'}`}
-                                        onClick={(event) => checkAnswer(event, item)}
-                                    >
-                                        {item}
-                                    </button>)
-                                }
+                            <div style={{
+                                background: 'rgba(255, 255, 255, 0.2)',
+                                height: '8px',
+                                borderRadius: '10px',
+                                overflow: 'hidden'
+                            }}>
+                                <motion.div
+                                    initial={{ width: 0 }}
+                                    animate={{ 
+                                        width: `${((questionIndex + 1) / quizs?.length) * 100}%` 
+                                    }}
+                                    transition={{ duration: 0.5 }}
+                                    style={{
+                                        background: 'linear-gradient(90deg, #60d600 0%, #4ade80 100%)',
+                                        height: '100%',
+                                        borderRadius: '10px'
+                                    }}
+                                />
                             </div>
-
-                            {
-                                (questionIndex + 1) !== quizs.length ?
-                                    <button className='btn py-2 w-100 mt-3 bg-primary text-light fw-bold' onClick={nextQuestion} disabled={!selectedAnswer}>Next Question</button>
-                                    :
-                                    <button className='btn py-2 w-100 mt-3 bg-primary text-light fw-bold' onClick={showTheResult} disabled={!selectedAnswer}>Show Result</button>
-                            }
                         </div>
+                        <motion.div 
+                            style={{ 
+                                fontSize: '24px',
+                                fontWeight: 'bold',
+                                color: '#60d600',
+                                marginLeft: '20px',
+                                minWidth: '80px',
+                                textAlign: 'right'
+                            }}
+                            key={`${questionIndex}-counter`}
+                            initial={{ scale: 0.8 }}
+                            animate={{ scale: 1 }}
+                            transition={{ type: 'spring', stiffness: 500 }}
+                        >
+                            {quizs.indexOf(question) + 1} / {quizs?.length}
+                        </motion.div>
+                    </motion.div>
+
+                    {/* Timer - таймер обратного отсчета */}
+                    {timerActive && (
+                        <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            style={{
+                                background: timeLeft <= 60 
+                                    ? 'rgba(220, 53, 69, 0.2)' 
+                                    : timeLeft <= 300 
+                                        ? 'rgba(255, 193, 7, 0.2)' 
+                                        : 'rgba(255, 255, 255, 0.15)',
+                                borderRadius: '16px',
+                                padding: '16px 24px',
+                                marginBottom: '24px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                gap: '12px',
+                                border: timeLeft <= 60 
+                                    ? '2px solid rgba(220, 53, 69, 0.6)' 
+                                    : '2px solid rgba(255, 255, 255, 0.2)'
+                            }}
+                        >
+                            <motion.span
+                                animate={timeLeft <= 60 ? { scale: [1, 1.2, 1] } : {}}
+                                transition={{ duration: 1, repeat: Infinity }}
+                                style={{ fontSize: '24px' }}
+                            >
+                                {timeLeft <= 60 ? '⏰' : '⏱️'}
+                            </motion.span>
+                            <motion.div
+                                animate={timeLeft <= 60 ? { color: ['#fff', '#ff6b6b', '#fff'] } : {}}
+                                transition={{ duration: 1, repeat: Infinity }}
+                                style={{
+                                    fontSize: '28px',
+                                    fontWeight: 'bold',
+                                    color: timeLeft <= 60 
+                                        ? '#ff6b6b' 
+                                        : timeLeft <= 300 
+                                            ? '#ffc107' 
+                                            : '#fff',
+                                    fontFamily: 'monospace'
+                                }}
+                            >
+                                {formatTime(timeLeft)}
+                            </motion.div>
+                            <span style={{ 
+                                fontSize: '14px', 
+                                color: 'rgba(255, 255, 255, 0.8)',
+                                fontWeight: '500'
+                            }}>
+                                {timeLeft <= 60 ? 'Поспішайте!' : 'залишилось'}
+                            </span>
+                        </motion.div>
+                    )}
+
+                    <motion.h3
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 }}
+                        style={{
+                            color: '#fff',
+                            fontSize: '22px',
+                            fontWeight: '600',
+                            lineHeight: '1.5',
+                            marginBottom: '24px'
+                        }}
+                    >
+                        {question?.question}
+                    </motion.h3>
+
+                    <div>
+                        {question?.options?.map((item, index) => (
+                            <motion.button
+                                key={index}
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.1 + index * 0.05 }}
+                                style={optionStyle(selectedAnswer === item)}
+                                onClick={(event) => checkAnswer(event, item)}
+                                disabled={isCompleted}
+                                whileHover={{ 
+                                    scale: isCompleted ? 1 : 1.02,
+                                    boxShadow: isCompleted ? 'none' : '0 4px 15px rgba(255, 255, 255, 0.2)'
+                                }}
+                                whileTap={{ scale: isCompleted ? 1 : 0.98 }}
+                            >
+                                <span style={{ marginRight: '12px', fontSize: '18px' }}>
+                                    {selectedAnswer === item ? '✓' : String.fromCharCode(65 + index)}
+                                </span>
+                                {item}
+                            </motion.button>
+                        ))}
                     </div>
-                </div>
-            </div>
-        </section>
+
+                    <motion.button
+                        style={buttonStyle}
+                        onClick={(questionIndex + 1) !== quizs.length ? nextQuestion : showTheResult}
+                        disabled={!selectedAnswer || isCompleted}
+                        whileHover={{ 
+                            scale: !selectedAnswer || isCompleted ? 1 : 1.02,
+                            boxShadow: !selectedAnswer || isCompleted 
+                                ? '0 4px 15px rgba(102, 126, 234, 0.4)' 
+                                : '0 6px 20px rgba(102, 126, 234, 0.6)'
+                        }}
+                        whileTap={{ scale: !selectedAnswer || isCompleted ? 1 : 0.98 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: !selectedAnswer || isCompleted ? 0.5 : 1, y: 0 }}
+                        transition={{ delay: 0.3 }}
+                    >
+                        {(questionIndex + 1) !== quizs.length 
+                            ? '➡️ Наступне питання' 
+                            : '🎯 Показати результат'}
+                    </motion.button>
+                </motion.div>
+            </AnimatePresence>
+        </div>
     );
 };
 

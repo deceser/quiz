@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
@@ -6,6 +12,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     letter-spacing: 0.5px;
+    overflow-x: hidden;
 }
 
 code {
@@ -16,26 +23,88 @@ code {
 h1,
 h2,
 h3 {
-    font-family: 'Helvetica Neue';
+    font-family: 'Helvetica Neue', sans-serif;
     font-weight: 600;
     letter-spacing: 0.5px;
 }
 
-.btn,
-.btn-dark,
-.btn-check:focus + .btn-dark,
-.btn-dark:focus,
-.btn-check:focus + .btn,
-.btn:focus {
-    border: none;
-    box-shadow: none;
+input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
 }
 
-.btn-dark:hover {
-    background: #212529;
+input:focus {
+    outline: none;
 }
 
-.bg-primary,
-.btn-light {
-    letter-spacing: 0.7px;
+button {
+    font-family: inherit;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 28px !important;
+    }
+    
+    h2 {
+        font-size: 24px !important;
+    }
+    
+    h3 {
+        font-size: 18px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+    
+    h1 {
+        font-size: 24px !important;
+    }
+    
+    h2 {
+        font-size: 20px !important;
+    }
+    
+    h3 {
+        font-size: 16px !important;
+    }
+}
+
+/* Анимация для плавной загрузки */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Улучшенная прокрутка на iOS */
+* {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Стили для скроллбара */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
 }
