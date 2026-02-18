@@ -42,10 +42,12 @@ const Start = () => {
         setLoading(true);
         setShowConfirmModal(false);
 
-        const success = await setStudentInfo(firstName.trim(), lastName.trim());
-        
-        if (success) {
+        const result = await setStudentInfo(firstName.trim(), lastName.trim());
+
+        if (result.success) {
             startQuiz();
+        } else if (result.reason === 'already_authorized') {
+            setError('Вже авторизовано під цим іменем. Хтось інший зараз проходить тест.');
         } else {
             setError('Помилка створення сесії. Перевірте налаштування Supabase або ви вже пройшли тест.');
         }

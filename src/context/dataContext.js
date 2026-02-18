@@ -111,12 +111,26 @@ export const DataProvider = ({children}) => {
     const completedSessionId = localStorage.getItem('quiz_completed_session');
     if (completedSessionId) {
       await checkSessionStatus(completedSessionId);
-      return false;
+      return { success: false };
+    }
+
+    // Проверяем, не авторизован ли уже кто-то под этим именем (активная сессия без completed_at)
+    const { data: existing } = await supabase
+      .from('quiz_sessions')
+      .select('id')
+      .eq('first_name', firstName)
+      .eq('last_name', lastName)
+      .is('completed_at', null)
+      .limit(1)
+      .maybeSingle();
+
+    if (existing) {
+      return { success: false, reason: 'already_authorized' };
     }
 
     setStudentName(firstName);
     setStudentSurname(lastName);
-    
+
     // Создаем сессию в Supabase
     const { data, error } = await supabase
       .from('quiz_sessions')
@@ -134,15 +148,15 @@ export const DataProvider = ({children}) => {
 
     if (error) {
       console.error('Помилка створення сесії:', error);
-      return false;
+      return { success: false };
     }
 
     if (data) {
       setSessionId(data.id);
-      setAllAnswers([]); // Сбрасываем массив ответов
-      return true;
+      setAllAnswers([]);
+      return { success: true };
     }
-    return false;
+    return { success: false };
   };
 
   // Start Quiz
