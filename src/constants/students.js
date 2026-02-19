@@ -12,4 +12,5 @@ export const STUDENTS_LIST = [
   { firstName: 'Даніїл', lastName: 'Плигун' },
   { firstName: 'Софія', lastName: 'Реученко' },
   { firstName: 'Вероніка', lastName: 'Шмонова' },
+  { firstName: 'Мама', lastName: 'Габена' },
 ];

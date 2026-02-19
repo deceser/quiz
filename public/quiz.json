@@ -1,29 +1,29 @@
 [
     {
         "id": "01",
-        "question": "Який тип даних у C# використовується для зберігання цілих чисел?",
+        "question": "Який тип даних у Python використовується для зберігання цілих чисел?",
         "options": [
-            "string",
+            "float",
             "int",
-            "double",
+            "str",
             "bool"
         ],
         "answer": "int"
     },
     {
         "id": "02",
-        "question": "Яка команда використовується для виведення тексту на консоль у C#?",
+        "question": "Яка команда використовується для виведення тексту на консоль у Python?",
         "options": [
-            "Console.Read()",
+            "console.log()",
             "Console.WriteLine()",
             "print()",
-            "System.Out()"
+            "echo()"
         ],
-        "answer": "Console.WriteLine()"
+        "answer": "print()"
     },
     {
         "id": "03",
-        "question": "Чому дорівнюватиме значення x після виконання: int x = 10 + 5 * 2;",
+        "question": "Чому дорівнюватиме значення x після виконання: x = 10 + 5 * 2",
         "options": [
             "30",
             "20",
@@ -34,7 +34,7 @@
     },
     {
         "id": "04",
-        "question": "Що виведе код: if (5 > 3) { Console.WriteLine(\"Так\"); } else { Console.WriteLine(\"Ні\"); }",
+        "question": "Що виведе код: print(\"Так\") if 5 > 3 else print(\"Ні\")",
         "options": [
             "Так",
             "Ні",
@@ -45,7 +45,7 @@
     },
     {
         "id": "05",
-        "question": "Скільки разів виконається цикл: for (int i = 0; i < 5; i++)",
+        "question": "Скільки разів виконається цикл: for i in range(5):",
         "options": [
             "4 рази",
             "5 разів",
@@ -56,84 +56,84 @@
     },
     {
         "id": "06",
-        "question": "Яка умова правильна для циклу while, який має виконатись хоча б один раз?",
+        "question": "Яка конструкція гарантує виконання тіла хоча б один раз?",
         "options": [
-            "while (false)",
-            "while (true)",
-            "Використовувати do-while",
-            "while (0)"
+            "while False:",
+            "while True:",
+            "Python не має do-while, але можна використати while True з break",
+            "for i in range(1):"
         ],
-        "answer": "Використовувати do-while"
+        "answer": "Python не має do-while, але можна використати while True з break"
     },
     {
         "id": "07",
-        "question": "Як правильно оголосити масив з 10 цілих чисел у C#?",
+        "question": "Як правильно створити список з 10 нулів у Python?",
         "options": [
-            "int[] array = new int[10];",
-            "int array[10];",
-            "array int[10];",
-            "int[10] array;"
+            "list[10]",
+            "[0] * 10",
+            "int[] arr = new int[10];",
+            "array(10)"
         ],
-        "answer": "int[] array = new int[10];"
+        "answer": "[0] * 10"
     },
     {
         "id": "08",
-        "question": "Який індекс має перший елемент масиву?",
+        "question": "Який індекс має перший елемент списку у Python?",
         "options": [
             "1",
             "0",
             "-1",
-            "Залежить від розміру масиву"
+            "Залежить від розміру списку"
         ],
         "answer": "0"
     },
     {
         "id": "09",
-        "question": "Як створити двовимірний масив 8x8 для дошки шашок у C#?",
+        "question": "Як створити двовимірний список 8x8 для дошки шашок у Python?",
         "options": [
-            "int[8][8] board;",
-            "int[][] board = new int[8][8];",
-            "int[,] board = new int[8, 8];",
-            "int board[8, 8];"
+            "[[0] * 8] * 8",
+            "[[0] * 8 for _ in range(8)]",
+            "list[8][8]",
+            "array(8, 8)"
         ],
-        "answer": "int[,] board = new int[8, 8];"
+        "answer": "[[0] * 8 for _ in range(8)]"
     },
     {
         "id": "10",
-        "question": "Як дізнатися довжину одновимірного масиву arr у C#?",
+        "question": "Як дізнатися довжину списку arr у Python?",
         "options": [
             "arr.size",
             "arr.count",
-            "arr.Length",
+            "len(arr)",
             "arr.length()"
         ],
-        "answer": "arr.Length"
+        "answer": "len(arr)"
     },
     {
         "id": "11",
-        "question": "Який тип даних використовується для зберігання тексту в C#?",
+        "question": "Який тип даних використовується для зберігання тексту в Python?",
         "options": [
             "text",
             "string",
-            "char",
+            "str",
             "varchar"
         ],
-        "answer": "string"
+        "answer": "str"
     },
     {
         "id": "12",
-        "question": "Як зчитати дані з консолі в змінну у C#?",
+        "question": "Як зчитати дані з консолі в змінну у Python?",
         "options": [
-            "Console.Input()",
             "Console.ReadLine()",
-            "Console.Scan()",
-            "Input()"
+            "scanf()",
+            "input()",
+            "read()"
         ],
-        "answer": "Console.ReadLine()"
+        "answer": "input()"
     },
     {
         "id": "13",
-        "question": "Що виведе: Console.WriteLine(10 > 5);",
+        "question": "Що виведе: print(10 > 5)",
         "options": [
             "10",
             "5",
@@ -144,7 +144,7 @@
     },
     {
         "id": "14",
-        "question": "Чому дорівнює i після виконання: int i = 0; i++;",
+        "question": "Чому дорівнює i після виконання: i = 0; i += 1",
         "options": [
             "0",
             "1",
@@ -155,18 +155,18 @@
     },
     {
         "id": "15",
-        "question": "Який оператор використовується для логічного І в C#?",
+        "question": "Який оператор використовується для логічного І в Python?",
         "options": [
             "AND",
             "&",
             "&&",
-            "||"
+            "and"
         ],
-        "answer": "&&"
+        "answer": "and"
     },
     {
         "id": "16",
-        "question": "Що робить команда break у циклі?",
+        "question": "Що робить команда break у циклі Python?",
         "options": [
             "Завершує програму",
             "Виходить з циклу",
@@ -177,18 +177,18 @@
     },
     {
         "id": "17",
-        "question": "Як створити масив з початковими значеннями {1, 2, 3} у C#?",
+        "question": "Як створити список з початковими значеннями [1, 2, 3] у Python?",
         "options": [
-            "int[] arr = {1, 2, 3};",
-            "int[] arr = [1, 2, 3];",
-            "int arr = new int{1, 2, 3};",
-            "int[] arr = (1, 2, 3);"
+            "arr = [1, 2, 3]",
+            "arr = (1, 2, 3)",
+            "arr = {1, 2, 3}",
+            "arr = list(1, 2, 3)"
         ],
-        "answer": "int[] arr = {1, 2, 3};"
+        "answer": "arr = [1, 2, 3]"
     },
     {
         "id": "18",
-        "question": "Як отримати другий елемент масиву arr?",
+        "question": "Як отримати другий елемент списку arr?",
         "options": [
             "arr[2]",
             "arr[1]",
@@ -199,7 +199,7 @@
     },
     {
         "id": "19",
-        "question": "Що виведе: int[] arr = {5, 10, 15}; Console.WriteLine(arr[0]);",
+        "question": "Що виведе: arr = [5, 10, 15]; print(arr[0])",
         "options": [
             "5",
             "10",
@@ -210,51 +210,51 @@
     },
     {
         "id": "20",
-        "question": "Як правильно пройти по всіх елементах масиву arr?",
+        "question": "Як правильно пройти по всіх елементах списку arr?",
         "options": [
-            "for (int i = 0; i < arr.Length; i++)",
-            "for (int i = 1; i <= arr.Length; i++)",
-            "for (int i = 0; i <= arr.Length; i++)",
-            "for (int i = 1; i < arr.Length; i++)"
+            "for i in range(1, len(arr)):",
+            "for i in range(len(arr)):",
+            "for i in range(0, len(arr) + 1):",
+            "for i in range(1, len(arr) + 1):"
         ],
-        "answer": "for (int i = 0; i < arr.Length; i++)"
+        "answer": "for i in range(len(arr)):"
     },
     {
         "id": "21",
-        "question": "Як звернутися до елемента двовимірного масиву board на 3-му рядку, 5-му стовпці?",
+        "question": "Як звернутися до елемента двовимірного списку board на 3-му рядку, 5-му стовпці (з 0)?",
         "options": [
             "board[3][5]",
-            "board[2, 4]",
+            "board[2][4]",
             "board(2, 4)",
             "board[3, 5]"
         ],
-        "answer": "board[2, 4]"
+        "answer": "board[2][4]"
     },
     {
         "id": "22",
-        "question": "Що відбудеться при зверненні до arr[10], якщо довжина масиву 5?",
+        "question": "Що відбудеться при зверненні до arr[10], якщо довжина списку 5?",
         "options": [
             "Поверне 0",
-            "Поверне null",
-            "Помилка виконання",
+            "Поверне None",
+            "IndexError",
             "Створить новий елемент"
         ],
-        "answer": "Помилка виконання"
+        "answer": "IndexError"
     },
     {
         "id": "23",
-        "question": "Як змінити значення першого елемента масиву arr на 100?",
+        "question": "Як змінити значення першого елемента списку arr на 100?",
         "options": [
-            "arr[1] = 100;",
-            "arr[0] = 100;",
-            "arr.set(0, 100);",
-            "arr.first = 100;"
+            "arr[1] = 100",
+            "arr[0] = 100",
+            "arr.set(0, 100)",
+            "arr.first = 100"
         ],
-        "answer": "arr[0] = 100;"
+        "answer": "arr[0] = 100"
     },
     {
         "id": "24",
-        "question": "Скільки елементів у масиві int[,] board = new int[8, 8];",
+        "question": "Скільки елементів у двовимірному списку board = [[0]*8 for _ in range(8)]?",
         "options": [
             "8",
             "16",
@@ -265,7 +265,7 @@
     },
     {
         "id": "25",
-        "question": "Який тип даних використовується для зберігання true/false?",
+        "question": "Який тип даних використовується для зберігання True/False у Python?",
         "options": [
             "int",
             "bool",

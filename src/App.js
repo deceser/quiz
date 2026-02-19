@@ -8,14 +8,13 @@ function App() {
   return (
     <DataProvider>
       {/* Welcome Page */}
-      <Start/>
+      <Start />
 
       {/* Quiz Page */}
-      <Quiz/>
+      <Quiz />
 
       {/* Result Page */}
-      <Result/>
-
+      <Result />
     </DataProvider>
   );
 }
