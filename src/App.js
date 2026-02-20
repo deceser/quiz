@@ -5,16 +5,20 @@ import Result from './components/Result';
 import { DataProvider } from './context/dataContext';
 
 function App() {
+  const block = (e) => e.preventDefault();
+
   return (
     <DataProvider>
-      {/* Welcome Page */}
-      <Start />
+      <div onCopy={block} onCut={block} onContextMenu={block}>
+        {/* Welcome Page */}
+        <Start />
 
-      {/* Quiz Page */}
-      <Quiz />
+        {/* Quiz Page */}
+        <Quiz />
 
-      {/* Result Page */}
-      <Result />
+        {/* Result Page */}
+        <Result />
+      </div>
     </DataProvider>
   );
 }
