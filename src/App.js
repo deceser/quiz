@@ -23,7 +23,6 @@ function App() {
         <Result />
       </div>
     </DataProvider>
-    // change this to a component
   );
 }
 
