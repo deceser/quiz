@@ -9,7 +9,10 @@ function App() {
 
   return (
     <DataProvider>
-      <div onCopy={block} onCut={block} onContextMenu={block}>
+      <div
+        onCopy={block}
+        onCut={block}
+        onContextMenu={block}>
         {/* Welcome Page */}
         <Start />
 
@@ -20,6 +23,7 @@ function App() {
         <Result />
       </div>
     </DataProvider>
+    // change this to a component
   );
 }
 
